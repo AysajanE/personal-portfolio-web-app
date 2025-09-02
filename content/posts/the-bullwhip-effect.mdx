@@ -1,0 +1,52 @@
+---
+title: "The Bullwhip Effect"
+date: "2021-07-14"
+excerpt: "Background In the 1990s, when Procter & Gamble was examining the supply chain order patterns for one of its best-selling products, Pampers diapers, they discovered an interesting phenomenon. As they expected, the sales at its retail stores fluctuated moderately. However, as they moved further up in the supply chain, they observed greater and greater amplification… Continue reading The Bullwhip Effect"
+author: "Aysajan Eziz"
+tags: ["migrated"]
+category: "migrated"
+published: true
+---
+
+## Background
+
+In the 1990s, when Procter & Gamble was examining the supply chain order patterns for one of its best-selling products, Pampers diapers, they discovered an interesting phenomenon.
+
+As they expected, the sales at its retail stores fluctuated moderately. However, as they moved further up in the supply chain, they observed greater and greater amplification in order variabilities at the distributor's and supplier's sites.
+
+The supply chain phenomenon of this increasing variability of orders is called [the Bullwhip Effect](https://sloanreview.mit.edu/article/the-bullwhip-effect-in-supply-chains/). It was named after the behavior of a whip when one swings from the origin (e.g., the increased wavelength of the whip in the figure below). The bullwhip effect is used to describe the amplifying demand variation in response to consumer demand as we move up in the supply chain.
+
+In this post, I will discuss when and why this effect happens and when and why it does not.
+
+![](https://39669.cdn.cke-cs.com/rQvD3VnunXZu34m86e5f/images/e13193735f29cd9f51b8da34f73f05e17b143af66752fd0a.png)
+
+Bullwhip effect ([source](https://commons.wikimedia.org/w/index.php?curid=10414792))
+
+## Supply Chain Example
+
+As an example, consider a simple shoes supply chain with a retailer, wholesaler, distributor, and manufacturer.
+
+Each week, supply chain members engage in a non-coordinated multi-step activities:
+
+- The retailer observes the customer shoes demand of the current week, satisfies the demand with the available inventory, and places an order with the wholesaler based on consumer demand forecasting for the next week.
+- The retailer's order request causes the wholesaler to fulfill the order with the available inventory and then place a new order with the distributor by forecasting the retailer's order next week.
+- Moving further up in the supply chain, the distributor fulfills the order request from the wholesaler and places an order with the manufacturer by forecasting the wholesaler's order next week.
+- Finally, the manufacturer fulfills the wholesaler's order request.
+
+We are interested in analyzing order patterns of different participants over time when they face varying consumer demand.
+
+In particular, we are interested in evaluating the degree of demand/order variability in the supply chain as we move up the supply chain (i.e., move further away from the consumer). Let's assume the manufacturer has unlimited capacity such that he/she is always able to fulfill any order request from the distributor.
+
+At each stage, if any participant (except manufacturer) lacks of inventory to satisfy demand of immediate downstream, he/she records a back-order, which needs to be fulfilled first from the next order. We express the relationship between the supply chain members using a simple chain:
+
+![](https://39669.cdn.cke-cs.com/rQvD3VnunXZu34m86e5f/images/96c2346298761ad8ab0b8164a6d4251dd3bd855e3c974880.png)
+
+A simple shoes supply chain
+
+## The Model
+
+Let's unpack demand/order patterns for each participant by defining explicit variables on demand/order, time, and supply chain levels.
+
+We first consider a case with no back order. The key steps are:
+
+Continue reading at [LessWrong……](https://www.lesswrong.com/posts/AwAAAtRpemBqyhDC2/the-bullwhip-effect)

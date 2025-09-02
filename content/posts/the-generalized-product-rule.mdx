@@ -1,0 +1,147 @@
+---
+title: "The Generalized Product Rule"
+date: "2021-06-09"
+excerpt: "Crossposted from the LessWrong Imagine we have a company with investment projects A, B, C,….For instance, A might be a new high-speed Internet service, B might be a new advanced computer, C might be a new inventory management software, etc. We are interested in calculating the total return from these investments at the company. This… Continue reading The Generalized Product Rule"
+author: "Aysajan Eziz"
+tags: ["migrated"]
+category: "migrated"
+published: true
+---
+
+_Crossposted from the [LessWrong](https://www.lesswrong.com/posts/zNiAzHwWtmHoddvEp/the-generalized-product-rule)_
+
+## Introduction
+
+Imagine we have a company with investment projects A, B, C,….For instance, A might be a new high-speed Internet service, B might be a new advanced computer, C might be a new inventory management software, etc. We are interested in calculating the total return from these investments at the company.
+
+This calculation could be fairly complicated since returns are context-dependent – e.g., new computer B might have higher return in the context of new Internet service A than it would without the new Internet service.
+
+## Core Assumptions
+
+But let's assume that the returns satisfy a few reasonable properties.
+
+1. The total return can be calculated from the return of each individual project given projects before it – e.g., the return of Internet service alone, the computer given the Internet service, the software given the computer and internet, etc.
+
+2. If the return of one project increases (given projects before it) while everything else stays the same, then the total return increases. For instance, if the Internet service gets cheaper, then the return of project A should increase with everything else the same. As a result, the overall return should increase.
+
+3. We can group projects into subprojects without changing the overall return. For instance, we could think of the Internet service and computer as a single project, or we could think of the computer and software as a single project, and either way the total return should stay the same.
+
+## The Product Rule Emerges
+
+Surprisingly, given just these three properties, we can conclude that returns obey a "product rule" similar to the product rule in probability theory.
+
+w[R(A, B)] = w[R(A)]w[R(B|A)]
+
+where w is some transformation of returns (e.g., it could be log-return, return-squared, etc.)
+
+This is essentially the first step in [Cox's Theorem](https://en.wikipedia.org/wiki/Cox%27s_theorem), a theorem used (most notably by [Jaynes](https://bayes.wustl.edu/)) to ground the logicalist interpretation of probability. But as this post will illustrate, core ideas of Cox's Theorem apply to many real-world systems which we don't usually think of as "probability theory".
+
+## Formal Analysis
+
+Let's unpack those assumptions a bit more for our investment return example by defining explicit variables on projects and returns. The three key properties are:
+
+1. Return R(A,B) of A and B together can be computed from the return R(A) of A alone and the return R(B|A) of B given A is done. For instance, the return on new high-speed Internet service and new computer together can be calculated from the return on the Internet service alone and the return on the computer given the Internet. Formally, R(A,B)=F[R(A), R(B|A)] for some function F.
+
+2. If the return R(A) goes up without changing R(B|A), then the total return R(A, B) of A and B together increases, and the same conclusion holds for R(B|A) increasing with R(A) unchanged. For instance, if the cost of high-speed Internet service goes down, then the return R(A) presumably increases without changing the return R(B|A) of the new computer given the Internet service, and this should increase the overall return R(A,B). Formally, F is increasing in both arguments.
+
+3. We can group projects A and B, or B and C into subprojects without changing the overall return R(A,B,C) of all three. For instance, if we want to compute total return R(A,B,C) on new Internet service, computer and software, we could group together the internet and computer as one hardware-and-network project, then compute R(A,B,C) from R(A,B) (hardware-and-network return) along with R(C|A,B) (return on the software given the hardware-and-network). Alternatively, we could instead group the computer and software as one hardware-and-software project with return R(B,C|A), and we should still get the same answer for the return of all three projects together. Formally, R(A,B,C)=F[R(A,B), R(C|A,B)]=F[R(A), R(B,C|A)]
+
+The third rule implies that F is associative. The key idea we derive here is that all one-dimensional, increasing and associative functions are either multiplication or some transformation of multiplication (e.g., addition/subtraction is log-transformation of multiplication).
+
+Thus we get a product rule:
+
+w(R(A, B)) = w(R(A))w(R(B|A))
+
+where w is some transformation (reversible) of R.
+
+## General Requirements
+
+More generally, to derive the product rule, we need some objects of interest like A, B, C,…, which serves as input. We also need some kind of real-valued measurement R that is a function of objects.
+
+Then the core requirements for the product rule are:
+
+1. R(A,B) is a function of R(A) and R(B|A):
+
+R(A, B) = F[R(A), R(B|A)]
+
+for some F.
+
+2. F is increasing with respect to both arguments:
+
+If R(A') > R(A), R(B|A') = R(B|A), then R(A', B) > R(A, B).
+
+Or, alternatively, if R(B'|A) > R(B|A), R(A) = R(A), then R(A, B') > R(A, B).
+
+3. We can group objects together without changing the value of measurement R:
+
+R(A,B,C) = F[R(A,B), R(C|A,B)] = F[R(A), R(B,C|A)]
+
+(Note that for the last assumption, we allow systems in which objects need to be kept in the same order – i.e., A before B before C. This is actually more general than the requirement for the product rule in probability theory, in which the objects are boolean logic variables, so "A and B" = "B and A". If reordering is allowed, then our generalized-product-rule becomes generalized-Bayes-rule.)
+
+The third assumption implies that F is associative. The second implies that it's increasing. The first implies that it's one-dimensional. So, we get the generalized-product-rule.
+
+## Real-World Applications
+
+What does this look like in the context of other real-world systems?
+
+### Example 1: Investment Portfolio Risk
+
+Suppose I have an investment portfolio with stock A and bond B, and I want to calculate the standard deviation of portfolio return R(A,B) as a proxy for risk measurement. This calculation is not trivial due to potential correlation of returns between stocks and bonds. For instance, the risk (measured in standard deviation) of investing in stocks alone is higher than the risk of investing in a portfolio with stocks and bonds.
+
+Let's assume the risks exhibit three properties:
+
+1. Portfolio risk R(A,B) of stock A and bond B can be calculated from risk R(A) of stock alone and incremental risk R(B|A) (positive or negative) of adding bond B given stock A already in the portfolio.
+
+2. If the risk R(A) of the stock rises without changing the incremental risk R(B|A), then the portfolio risk R(A,B) rises.
+
+3. Let's consider adding another asset C, an 8-week T-Bills (a type of cash-equivalents) to the investment portfolio. If we're computing new portfolio risk of stock A, bond B, and T-Bills C, then we could group stock and bond together as one sub-portfolio, and compute R(A,B,C) from R(A,B) (non-cash-asset) along with R(C|A,B) (incremental risk of adding T-Bills given the non-cash-asset). Alternatively, we could instead group the bond and T-Bills into one portfolio (non-equity-asset) with risk R(B,C|A), and we still get the same risk for all three assets together.
+
+As a result, we can apply the product rule to investment risks:
+
+w[R(A,B)] = w[R(A)]w[R(B|A)]
+
+Where w is some transformation of incremental risk (e.g., exponentiated assuming that those incremental risks add).
+
+### Example 2: Basketball Player Contributions
+
+Let's look at a different system in which we're interested in calculating the contribution in points made by basketball players A, B, C,… in a game relative to total points made by the team. For instance, R(A) could be 30%, meaning Stephen Curry contributed 30% of the total team points in a game, R(B) could be 25%, meaning Klay Thompson contributed 25% of the total points made, etc.
+
+Again, we assume three properties:
+
+1. The points contribution R(A,B) of Stephen Curry and Klay Thompson together on the court can be calculated from the contribution R(A) of Stephen Curry alone and incremental contribution R(B|A) of Klay Thompson given Stephen Curry on the court.
+
+2. If the contribution R(A) of Stephen Curry increases without changing the incremental contribution R(B|A), then the overall contribution R(A,B) to the team increases as well.
+
+3. We can group Stephen Curry and Klay Thomspon together as one "splash" player, and compute R(A,B,C) from R(A,B) (contribution of the "splash") along with R(C|A,B) (incremental contribution of Draymond Green given the "splash"). Alternatively, we could group Klay Thomson and Draymond Green as one big-man player with the contribution R(B,C|A), and we will get the same total contribution for all three players together on the court.
+
+Thus, we can have the product rule applied to basketball players' shooting percentage:
+
+w[R(A,B)]=w[R(A)]w[R(B|A)]
+
+where w is some transformation of player contribution.
+
+### Example 3: Traveling Salesman Problem
+
+Let's consider a modified version of the classic [traveling salesman problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in theoretical computer science and operations research. We're interested in finding the shortest travel time from an origin to cities A, B, C, ….
+
+Presumably the shortest travel time satisfy three assumptions:
+
+1. The shortest time R(A,B) of visiting cities A and B exactly once from origin can be computed from R(A) of visiting city A and added time R(B|A) of visiting city B given we already visited city A.
+
+2. If the shortest time R(A) of visiting city A increases without changing the additional travel time R(B|A), then the total traveling time R(A,B) of visiting both city A and B increases.
+
+3. We can group city A and B together as one region, and compute R(A,B,C) of shortest travel time to visit A, B, and C exactly once from R(A,B) of visiting the region with cities A and B along with R(C|A,B) (additional time it adds to visit city C along with city A and B to the total trip time). We could also instead group city B and C together with shortest travel time R(B,C|A), and we will get the same answer for visiting every city exactly once in our trip.
+
+With these three assumption above, we could apply the generalized product rule to the shortest travel time problem:
+
+w[R(A,B)]=w[R(A)]w[R(B|A)]
+
+where w is some transformation (reversible) of shortest travel time (e.g., w can be exponentiated shortest travel time).
+
+## Summary
+
+The traditional product rule in probability, p(AB) = p(A)p(B|A), states that the probability p(AB) of both A and B are true can be calculated by using the probability p(A) of A being true alone and the probability P(B|A) of B being true while given A is true. The conditions of the product rule suggest possible avenues to extend the traditional product rule to deal with things that are not restricted to logical boolean type.
+
+In particular, this post suggests continuing to use the product rule to represent real-valued measurements of objects A, B, C,… that satisfy a few fairly reasonable properties and proposes a generalized form of the product rule w[R(A,B)] = w[R(A)]w[R(B|A)]. R is some kind of real-number measurement and w is some transformation of R.
+
+For instance, in the company investment project example we have w[R(A,B)] = w[R(A)]w[R(B|A)] where R represents the project return and w can be log return.

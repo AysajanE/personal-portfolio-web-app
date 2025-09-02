@@ -1,0 +1,133 @@
+---
+title: "The Curious Path from Pullman to Hotel Pricing Puzzles" 
+date: "2025-08-22" 
+excerpt: "How a graduate school question, a philosophy of deep work, and an obsession with pricing puzzles led me to build this little corner of the internet." 
+author: "Aysajan Eziz" 
+tags: ["introduction", "journey", "philosophy", "dynamic pricing"] 
+category: "personal" 
+published: true 
+featured: true
+---
+
+# The Curious Path from Pullman to Hotel Pricing Puzzles
+
+*Or: How I learned to stop worrying about social media and love mathematical optimization*
+
+Hello there, curious visitor! 👋
+
+If you've found your way to this corner of the internet, you're probably wondering who builds an entire website to talk about pricing algorithms and the philosophy of focus. Well, that would be me—Aysajan Eziz, your friendly neighborhood Assistant Professor of Management Science at Ivey Business School.
+
+-----
+
+## A Journey That Began in Pullman
+
+My story doesn't start with a grand plan, but with a simple question that sparked in the wheat fields of Pullman, Washington. I had moved there from China to attend Washington State University for my graduate studies. While I was deep into my Master's in Statistics and later my PhD in Operations Research, I became fascinated by a seemingly simple observation: "Why do hotels charge different prices for the exact same room on the same night?"
+
+That question, nurtured through countless discussions with my advisor, became my passion. It was in Pullman that my academic journey truly began, shifting from a general interest in numbers to a specific obsession with the mathematics of pricing and consumer choice. The path wasn't linear. It rarely is when you're genuinely curious.
+
+```python
+# My academic journey, in pseudo-code
+def academic_evolution():
+    interests = ["statistics", "patterns", "data"]
+
+    while curiosity_level > 0:
+        if "why do prices change?" in questions:
+            interests.append("optimization")
+        if "how do we model uncertainty?" in questions:
+            interests.append("stochastic_modeling")
+        if "what makes a decision optimal?" in questions:
+            interests.append("operations_research")
+
+    return "PhD in Operations Research"
+
+# Spoiler alert: curiosity_level never drops to zero
+```
+
+-----
+
+## The Hotel Room That Changed Everything
+
+Here's the puzzle that hooked me: imagine a hotel with 100 identical rooms. A guest books room 237 for $150, but five minutes later, another guest books room 238 for $180. Same view, same amenities, same everything. What changed?
+
+*Demand, time, booking patterns, competitor prices, weather forecasts, local events...*
+
+It turns out that behind every price you see is a beautiful, complex mathematical dance. The goal of hotel revenue management is to create a pricing strategy that maximizes total revenue over a booking horizon, all while respecting the hotel's limited capacity.
+
+In academic terms, the problem looks something like this:
+
+$$\max_{\mathbf{p}} \sum_{t=1}^{T} \sum_{j=1}^{J} p_{jt} \cdot D_{jt}(p_{jt})$$
+
+$$\text{subject to} \quad \sum_{t=1}^{T} D_{jt}(p_{jt}) \le C_j \quad \forall j \in \{1, \dots, J\}$$
+
+Where:
+
+  * $p\_{jt}$ is the **price** for room type $j$ in booking period $t$.
+  * $D\_{jt}(p\_{jt})$ is the expected **demand** (or number of bookings) at that price.
+  * $C\_j$ is the total **capacity** (number of available rooms) for room type $j$.
+
+The goal is to find the optimal set of prices ($\\mathbf{p}$) that maximizes total revenue, ensuring you don't sell more rooms than you have. The math is elegant, but applying it to the real world? That's where things get *interesting*.
+
+-----
+
+## The Deep Work Philosophy
+
+About five years ago, I discovered Cal Newport's work on deep work, and it fundamentally changed how I approach both research and life. The idea is simple but revolutionary: in our hyperconnected world, the ability to focus without distraction on cognitively demanding tasks is becoming both increasingly rare and increasingly valuable.
+
+So I made a conscious choice: a minimal social media presence. Just deep, focused work on problems that matter.
+
+> "The ability to perform deep work is becoming increasingly rare at exactly the same time it is becoming increasingly valuable in our economy." — Cal Newport
+
+This allows me to dive deep into complex problems, whether it's an optimization model or a new machine learning architecture.
+
+-----
+
+## What You'll Find Here
+
+This website is my digital lab and journal. It's where I'll share my journey—the mathematical beauty, the research discoveries, and the occasional "aha!" moments.
+
+You'll find posts about:
+
+1.  **Democratizing Dynamic Pricing:** My core interest is bringing enterprise-grade pricing power to small and independent hotels.
+2.  **AI & Machine Learning:** I'm exploring how to harness the full power of AI to enhance and improve my work and life.
+3.  **Blockchain & Web3:** Specifically, I'm digging into the Ethereum ecosystem, L2 solutions, and the causal relationships between L1/L2 interactions.
+4.  **Pricing Puzzles:** Fun and challenging problems from the world of revenue management.
+5.  **Academic Life:** Reflections on the rewarding and sometimes frustrating path of a researcher.
+
+{/* end list */}
+
+```r
+# What makes a good research problem?
+evaluate_research_problem <- function(problem) {
+  criteria <- list(
+    intellectual_curiosity = keeps_you_awake_thinking(problem),
+    practical_relevance = has_real_world_impact(problem),
+    mathematical_elegance = is_beautifully_structured(problem)
+  )
+
+  if (all(unlist(criteria))) {
+    return("Worth pursuing!")
+  } else {
+    return("Keep looking...")
+  }
+}
+```
+
+-----
+
+## The London, Ontario Chapter
+
+These days, I'm based in London, Ontario—a city that perfectly embodies the balance I seek. It's big enough for excellent coffee shops (essential for any academic) and small enough that you can actually focus. My wife and I have made this our home since 2018, and it's where I do my best thinking about optimization problems and the causal links between Ethereum and its Layer-2 solutions.
+
+## A Promise (And A Warning)
+
+Here's my promise: I'll share the real journey, not just the polished papers. The failed experiments, the "obvious" insights that took months to see, and the moments when mathematics perfectly describes something messy from the real world.
+
+Fair warning: I might get *really* excited about Lagrange multipliers or share code that optimizes hotel overbooking strategies. But if you're curious about how algorithms are shaping our world, you're in the right place.
+
+-----
+
+So welcome! Grab a coffee, settle in, and let's explore the fascinating world where mathematics meets reality.
+
+*Ready for the journey?*
+
+**P.S.** If you ever find yourself in London, Ontario, and want to discuss the finer points of revenue optimization over coffee, drop me a line at aysajan1986@gmail.com.

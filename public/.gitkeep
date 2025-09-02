@@ -1,0 +1,46 @@
+# Public Assets Directory
+
+Place your images, favicon, and other static assets in this directory.
+
+## Required Assets for Production
+
+### Favicon and Icons
+- `favicon.ico` - 32x32 favicon
+- `icon-192x192.png` - 192x192 PWA icon
+- `icon-512x512.png` - 512x512 PWA icon
+
+### Social Media Images  
+- `og-image.png` - 1200x630 Open Graph image for social sharing
+- `twitter-image.png` - 1200x630 Twitter Card image (optional, can use og-image)
+
+### Profile and Project Images
+- Profile photos for about page
+- Project screenshots for portfolio
+- Research paper figures or diagrams
+- Blog post images
+
+## Image Optimization Tips
+
+- Use WebP format when possible for better compression
+- Optimize images before uploading (recommended tools: TinyPNG, ImageOptim)
+- Next.js Image component provides automatic optimization
+- Keep file sizes reasonable for web performance
+
+## Directory Structure Example
+
+```
+public/
+├── favicon.ico
+├── icon-192x192.png
+├── icon-512x512.png
+├── og-image.png
+├── profile/
+│   ├── headshot.jpg
+│   └── about-photo.jpg
+├── projects/
+│   ├── spaced-repetition-app.png
+│   └── research-tool.png
+└── blog/
+    ├── post-1-image.jpg
+    └── post-2-diagram.png
+```

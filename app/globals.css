@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply max-w-2xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer base {
+  /* Enhanced reading experience */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Better text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Focus outline improvements */
+  *:focus {
+    outline-offset: 2px;
+  }
+  
+  /* Selection styling */
+  ::selection {
+    @apply bg-gray-200;
+  }
+  
+  /* Enhanced prose styling */
+  .prose {
+    @apply text-gray-900 leading-relaxed;
+    
+    /* Headings with better spacing */
+    h1, h2, h3, h4, h5, h6 {
+      @apply font-bold leading-tight;
+      scroll-margin-top: 2rem;
+    }
+    
+    h1 {
+      @apply text-2xl mb-6 mt-8;
+    }
+    
+    h2 {
+      @apply text-xl mb-4 mt-8;
+    }
+    
+    h3 {
+      @apply text-lg mb-3 mt-6;
+    }
+    
+    /* Paragraph spacing */
+    p {
+      @apply mb-4 leading-relaxed;
+    }
+    
+    /* Lists */
+    ul, ol {
+      @apply mb-4 pl-6;
+    }
+    
+    li {
+      @apply mb-2;
+    }
+    
+    /* Links */
+    a {
+      @apply underline hover:no-underline transition-colors;
+    }
+    
+    /* Code */
+    code {
+      @apply bg-gray-100 px-1 py-0.5 rounded text-sm font-mono;
+    }
+    
+    pre {
+      @apply bg-gray-100 p-4 rounded overflow-x-auto mb-4 text-sm;
+    }
+    
+    pre code {
+      @apply bg-transparent px-0 py-0;
+    }
+    
+    /* Blockquotes */
+    blockquote {
+      @apply border-l-4 border-gray-300 pl-4 py-2 mb-4 italic text-gray-700;
+    }
+    
+    /* Tables */
+    table {
+      @apply w-full border-collapse mb-4;
+    }
+    
+    th, td {
+      @apply border border-gray-300 px-3 py-2 text-left;
+    }
+    
+    th {
+      @apply bg-gray-50 font-semibold;
+    }
+    
+    /* Images */
+    img {
+      @apply rounded-md mb-4;
+    }
+    
+    /* Horizontal rules */
+    hr {
+      @apply border-gray-300 my-8;
+    }
+  }
+  
+  /* Mathematical expressions */
+  .katex-display {
+    @apply my-6;
+  }
+  
+  .katex {
+    font-size: 1.1em !important;
+  }
+}
