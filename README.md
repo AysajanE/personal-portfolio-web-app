@@ -1,6 +1,6 @@
 # Personal Portfolio Web App
 
-An ultra-minimalist blog for Dr. Aysa Janez Iz, embracing radical minimalism with only essential features. Built with Next.js 15, TypeScript, and Tailwind CSS.
+An ultra-minimalist blog for Dr. Aysajan Eziz, embracing radical minimalism with only essential features. Built with Next.js 15, TypeScript, and Tailwind CSS.
 
 ## 🌟 Features
 
@@ -94,7 +94,7 @@ Create a new MDX file in `content/posts/` with this frontmatter schema:
 title: "Your Post Title"
 date: "2024-01-15"
 excerpt: "A brief description of your post"
-author: "Dr. Aysa Janez Iz"
+author: "Dr. Aysajan Eziz"
 tags: ["operations research", "data science"]
 category: "Research" # or "Project" for legacy content
 published: true
@@ -262,7 +262,7 @@ For questions about this ultra-minimalist blog system:
 
 ## 📄 License
 
-This project is Dr. Aysa Janez Iz's ultra-minimalist blog. Feel free to use it as inspiration for your own minimalist blog, but please replace all personal content with your own.
+This project is Dr. Aysajan Eziz's ultra-minimalist blog. Feel free to use it as inspiration for your own minimalist blog, but please replace all personal content with your own.
 
 ---
 
