@@ -20,7 +20,14 @@
       "Bash(git worktree:*)",
       "Bash(code:*)",
       "Bash(open -a \"Visual Studio Code\":*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(dig:*)",
+      "mcp__vercel__list_teams",
+      "mcp__vercel__list_projects",
+      "mcp__vercel__get_project",
+      "mcp__vercel__list_deployments",
+      "Bash(sudo dscacheutil:*)",
+      "Bash(sudo killall:*)"
     ],
     "deny": [],
     "ask": [],

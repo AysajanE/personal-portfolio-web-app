@@ -122,4 +122,20 @@
   .katex {
     font-size: 1.1em !important;
   }
+
+  /* Improve code contrast (Highlight.js tokens) */
+  .hljs,
+  .prose pre code,
+  .hljs-title,
+  .hljs-name,
+  .hljs-attr,
+  .hljs-variable,
+  .hljs-params,
+  .hljs-subst {
+    color: #111827; /* Tailwind gray-900 for readability */
+  }
+  .hljs-comment,
+  .hljs-quote {
+    color: #6b7280; /* gray-500 for comments */
+  }
 }
