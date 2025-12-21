@@ -30,3 +30,5 @@ Thumbs.db
 
 # Development
 .trees/
+.vercel
+.env*.local
