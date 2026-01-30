@@ -1,0 +1,186 @@
+---
+title: "Autonomous Agentic Research Swarm"
+date: "2026-01-30"
+tags: ["project", "AI", "agentic-systems", "automation", "research"]
+---
+
+# Autonomous Agentic Research Swarm
+
+Running multiple AI coding agents on the same project sounds great in theory—until they start stepping on each other's toes. One agent refactors a function while another is still using it. Definitions drift. Merge conflicts pile up. The coordination overhead quickly outweighs the benefits.
+
+I built the Autonomous Agentic Research Swarm to solve this problem. The key insight? Don't build complex "agents talking to each other" systems. Instead, use the repository itself as shared memory.
+
+**Status:** Active
+**GitHub:** [AysajanE/autonomous-agentic-research-swarm](https://github.com/AysajanE/autonomous-agentic-research-swarm)
+
+## The Problem with Multi-Agent Systems
+
+Most multi-agent frameworks try to solve coordination through communication—agents sending messages back and forth, negotiating who does what, sharing state through APIs or message queues. This creates several challenges:
+
+- **Complexity:** Communication protocols become their own source of bugs
+- **Opacity:** It's hard to audit what happened and why
+- **Definition drift:** Agents may develop inconsistent understandings of shared concepts
+- **Merge conflicts:** Parallel work on the same files without clear ownership boundaries
+
+## The Solution: Repo as Shared Memory
+
+The Autonomous Agentic Research Swarm takes a different approach. Instead of agents communicating directly, all coordination happens through the repository:
+
+- **Task files** define scoped work with explicit ownership boundaries
+- **Contract files** lock critical definitions (metrics, schemas, data sources)
+- **Git branches** isolate each agent's work
+- **Quality gates** verify outputs before merging
+
+The repo's file system and git history become the single source of truth. No hidden state, no complex protocols—just files that humans can read and review.
+
+## Architecture: Planner, Worker, Judge
+
+The system uses a three-role architecture:
+
+1. **Planner:** Creates and prioritizes tasks, respects dependencies, ensures workstream isolation. Can be a heuristic (priority-based) or an LLM (Claude Code).
+
+2. **Worker:** Executes exactly one task in an isolated git worktree. Follows the task specification, respects allowed/disallowed paths, and updates only the task file's status sections. Workers can be Claude Code, Codex CLI, or other AI coding agents.
+
+3. **Judge:** Runs deterministic quality gates before marking work complete. Enforces path ownership rules, runs tests, and optionally triggers LLM-based code review.
+
+This separation ensures that even in fully unattended mode, no single agent can bypass the validation layer.
+
+## Key Features
+
+### File-Based Task Management
+
+Tasks live in `.orchestrator/` and move through lifecycle folders:
+
+- `backlog/` → tasks ready to be claimed
+- `active/` → work in progress
+- `ready_for_review/` → pending human or automated review
+- `done/` → completed work
+- `blocked/` → needs human intervention (marked with `@human`)
+
+Each task file is a Markdown document with YAML frontmatter specifying:
+
+- Dependencies on other tasks
+- Allowed and disallowed file paths
+- Quality gates to run
+- Success criteria
+
+### Contract-Based Coordination
+
+For research projects, definition drift is a serious problem. If two agents have different understandings of how a metric is calculated, their outputs won't be compatible.
+
+The swarm uses "protocol locks"—contract files that define canonical definitions for metrics, data sources, validation tolerances, and time windows. If an agent encounters a conflict with a contract, it must stop and flag the issue for human review.
+
+### Workstream Isolation
+
+Tasks are organized into workstreams (W0, W1, W2, etc.) that represent logical areas of work. The supervisor enforces that only one non-parallel task runs per workstream at a time, preventing conflicts without requiring explicit locks.
+
+### Git Worktree Isolation
+
+Each task runs in its own git worktree with a dedicated branch. This means:
+
+- No merge conflicts during execution
+- Clean diffs for review
+- Easy rollback if something goes wrong
+- Parallel execution without file system conflicts
+
+### Automated Repair Loop
+
+For long-running unattended operations, the supervisor includes a repair loop. If a PR fails CI checks or has merge conflicts, and hasn't been updated recently, the system can automatically spawn a repair worker to fix the issue.
+
+## Technical Implementation
+
+### Repository Structure
+
+```
+.orchestrator/
+├── backlog/          # Tasks ready to start
+├── active/           # Work in progress
+├── ready_for_review/ # Pending review
+├── done/             # Completed
+├── blocked/          # Needs human help
+└── handoff/          # Inter-agent notes
+
+docs/
+├── protocol.md       # Canonical definitions (contract)
+└── registry/         # Data source registries
+
+scripts/
+├── swarm.py          # Supervisor script
+├── sweep_tasks.py    # Task lifecycle management
+└── quality_gates.py  # Validation utilities
+```
+
+### Running the Swarm
+
+The supervisor can run in several modes:
+
+**Single tick (start ready tasks):**
+```bash
+python scripts/swarm.py tick --max-workers 2 --planner heuristic
+```
+
+**Continuous loop (unattended):**
+```bash
+SWARM_UNATTENDED_I_UNDERSTAND=1 python scripts/swarm.py loop \
+  --interval-seconds 300 \
+  --max-workers 2 \
+  --unattended
+```
+
+**Tmux-based supervisor:**
+```bash
+python scripts/swarm.py tmux-start --attach
+```
+
+### Safety Considerations
+
+Unattended AI execution requires careful sandboxing. The swarm is designed to run in:
+
+- GitHub Codespaces (recommended)
+- Docker containers
+- Dedicated VMs with no sensitive credentials
+
+The `--unattended` flag requires explicit acknowledgment via environment variable, and the documentation strongly recommends never running unattended mode on a machine with access to production systems or sensitive data.
+
+## Use Case: Empirical Research
+
+The template includes a sample research project analyzing Ethereum L2 rollup economics. The protocol lock defines:
+
+- **Primary metric:** Settlement Take Rate (STR)
+- **Data sources:** On-chain data, growthepie, L2BEAT
+- **Time window:** 2022-01-01 to present
+- **Validation tolerances:** Cross-source reconciliation targets
+
+This demonstrates how the swarm can handle empirical research with strict definitional requirements—the kind of work where "close enough" isn't acceptable.
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AysajanE/autonomous-agentic-research-swarm.git
+   ```
+
+2. Review the documentation:
+   - `AGENTS.md` for agent behavior guidelines
+   - `docs/protocol.md` for the example research protocol
+   - `.orchestrator/backlog/` for sample task files
+
+3. Create your own tasks following the template structure
+
+4. Run in supervised mode first to understand the workflow before enabling unattended execution
+
+## Lessons Learned
+
+Building this system reinforced a few principles:
+
+**Simplicity wins.** File-based coordination is less elegant than a proper message queue, but it's transparent, debuggable, and version-controlled.
+
+**Explicit ownership prevents conflicts.** Rather than trying to detect and resolve conflicts, prevent them by giving each task clear boundaries.
+
+**Contracts catch drift early.** When working with quantitative research, locking definitions in a reviewable file prevents subtle inconsistencies from propagating.
+
+**Humans stay in the loop.** The `@human` tag and `blocked/` folder ensure that edge cases get escalated rather than silently mishandled.
+
+---
+
+*This project is actively evolving. The repo itself serves as the canonical documentation—if anything here drifts from the implementation, trust the code.*

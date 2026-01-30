@@ -2,6 +2,7 @@
 export const ogTitleMap: Record<string, string> = {
   "a-reflection-on-richard-hammings-you-and-your-research-striving-for-greatness": "A Reflection on Richard Hamming’s ‘You and Your Research’: Striving for Greatness",
   "about-being-disciplined": "About Being Disciplined",
+  "autonomous-agentic-research-swarm": "Autonomous Agentic Research Swarm",
   "bid-price-network-revenue-management": "An evaluation of the bid price and nested network revenue management allocation methods",
   "dawn-to-destiny-how-early-mornings-shaped-my-life": "Dawn to Destiny: How Early Mornings Shaped My Life",
   "grateful-for-every-moment-how-i-learned-to-enjoy-life-more": "Grateful for Every Moment: How I Learned to Enjoy Life More",
