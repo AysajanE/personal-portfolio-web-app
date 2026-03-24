@@ -15,6 +15,7 @@ export const ogTitleMap: Record<string, string> = {
   "running-through-history-our-unforgettable-first-time-journey-through-europe": "Running Through History: Our Unforgettable First-Time Journey Through Europe",
   "spaced-repetition-app": "Spaced Repetition Learning Web Application",
   "steven-pressfield-trilogy-review": "Steven Pressfield Trilogy Review",
+  "survive-then-thrive-a-40-year-reflection": "Survive, Then Thrive: A 40-Year Reflection",
   "the-24-hour-currency-redefining-time-waste-and-worth": "The 24-Hour Currency: Redefining Time Waste and Worth",
   "the-bullwhip-effect": "The Bullwhip Effect",
   "the-generalized-product-rule": "The Generalized Product Rule",
