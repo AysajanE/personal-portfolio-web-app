@@ -1,0 +1,226 @@
+---
+title: "Why I Built Plan Orchestrator"
+date: "2026-03-30"
+excerpt: "Plan Orchestrator grew out of a simple frustration: I wanted help from the best AI agents available, but I did not want to babysit them step by step. This is the story of how a demanding private project pushed me to build a more careful, reliable way to use AI for real work."
+author: "Aysajan Eziz"
+tags: ["project", "AI", "automation", "workflow"]
+category: "Project"
+published: false
+featured: false
+---
+
+Over the past several months, I have been working on a large private project that I am not ready to talk about publicly yet.
+
+This was not the kind of project where I could afford sloppy execution.
+
+It had multiple phases, many moving parts, and a high bar for quality. I wanted the work done with real discipline: clear scope, clean implementation, proper checks, and a level of reliability that would hold up under real scrutiny.
+
+By that point, I had already started using AI agents in my workflow, and I had experienced both sides of that reality.
+
+On a good day, an AI agent feels like a superpower.
+
+On a bad day, it feels like hiring an extremely fast intern who needs constant supervision.
+
+That tension is what led me to Plan Orchestrator.
+
+-----
+
+## Where the Frustration Started
+
+While working on that private project, I found myself asking the same question again and again:
+
+**Can I use the best AI agents available without having to sit there and babysit them the whole time?**
+
+I did not just want help writing code.
+
+I wanted a robust automation system that could take on approved tasks, execute them carefully, check the results, and stop when human judgment was required.
+
+In other words, I wanted leverage without losing control.
+
+Because the truth is this: manually prompting AI over and over again gets tiring very quickly on a serious project.
+
+You prompt it once.  
+Then you correct it.  
+Then you ask it to re-check something.  
+Then you ask another AI to review it.  
+Then you realize the first AI wandered outside the intended scope.  
+Then you go back and clean up the process yourself.
+
+At some point, you start wondering whether the workflow itself has become the real bottleneck.
+
+That is exactly where I found myself.
+
+-----
+
+## The Informal Workflow I Was Already Using
+
+Before Plan Orchestrator existed, I was already doing a rough version of it by hand.
+
+Without formally naming it, I had fallen into a pattern:
+
+- one AI helps think through the task
+- one AI does the actual implementation
+- another AI reviews or audits the result
+
+That workflow was useful. In fact, it was useful enough that I kept returning to it.
+
+But it had a problem: it was informal.
+
+It depended too much on my memory, my attention, and my manual coordination. I had to keep track of what was approved, what was in progress, what had been checked, and what still needed human judgment. It worked, but it was fragile.
+
+The more serious the project became, the more obvious it was that this needed to be formalized.
+
+I did not want a clever workflow living only in my head.
+
+I wanted a real system.
+
+-----
+
+## The Shift
+
+So I started building one.
+
+My goal was not to create the most autonomous AI system in the world.
+
+It was almost the opposite.
+
+I wanted to build something that would make AI-assisted work more disciplined, more resilient, and more trustworthy.
+
+The core idea was simple:
+
+1. A human approves the work in advance.
+2. The system executes one step at a time.
+3. Each step happens in its own isolated workspace.
+4. The result gets checked before review.
+5. More than one reviewer can inspect the same saved record of the work.
+6. If a human decision or outside evidence is needed, the system stops cleanly.
+
+That became the foundation of Plan Orchestrator.
+
+-----
+
+## What Plan Orchestrator Does
+
+In plain English, Plan Orchestrator is a careful manager for AI-driven changes to a software project.
+
+It does not tell AI to "just handle it."
+
+Instead, it starts with an approved written playbook. Then it carries out that playbook one item at a time. Every item gets its own isolated workspace. The result is checked. Then separate review passes look at the same saved copy of the work.
+
+If anything important is unclear, missing, or outside scope, the process stops instead of bluffing its way forward.
+
+I built it this way because that is how I think real work should be done.
+
+If the stakes are high, the process should be calm.
+
+If the task is important, the system should leave a trail.
+
+If a decision belongs to a human, the machine should know to pause.
+
+-----
+
+## Why It Had to Work in Real Conditions
+
+That project became the perfect environment for this idea to prove itself.
+
+The project was large enough that I genuinely benefited from automation.
+
+But it was also serious enough that I could not simply let an agent roam freely and hope for the best.
+
+That combination forced clarity on me.
+
+I needed a workflow that could handle real work across multiple phases while still respecting boundaries, quality standards, and review discipline. I needed something that could help me move faster without making me nervous about what might have quietly gone wrong.
+
+So I started deploying earlier versions of Plan Orchestrator inside it.
+
+Not as a side experiment.  
+Not as a toy.  
+As part of the actual working process.
+
+That was important to me.
+
+I did not want to build a framework that sounded good in theory but collapsed under real pressure. I wanted it to earn its place by surviving contact with an actual project.
+
+-----
+
+## How It Evolved
+
+The version published on GitHub did not appear all at once.
+
+It came out of several rounds of real use, observation, adjustment, and improvement.
+
+I would run it on that private project, watch where the process felt too loose or too brittle, tighten the workflow, improve the handoff, strengthen the checks, refine the stopping rules, and then run it again.
+
+That cycle repeated many times.
+
+So when I say Plan Orchestrator is battle-tested, I do not mean that in a marketing sense. I mean it literally grew out of real needs inside a real project, with each iteration shaped by what actually held up and what did not.
+
+The latest version is the one I have now. It is the cleanest and strongest version so far.
+
+And I am still actively using it.
+
+-----
+
+## The Deeper Lesson
+
+Working on this taught me something that now feels obvious:
+
+The real challenge with AI is not just getting output.
+
+The real challenge is building a process you can trust.
+
+A lot of attention goes to what model is smartest, fastest, or most autonomous. Those things matter. But for serious work, I think process matters just as much.
+
+How do you know what the AI was asked to do?  
+How do you know whether it stayed in bounds?  
+How do you know the result was actually checked?  
+How do you know when to stop and ask for human judgment?
+
+Those questions are not glamorous, but they are the questions that decide whether an AI workflow is actually useful in practice.
+
+Plan Orchestrator is my answer, at least for now.
+
+-----
+
+## What This Might Mean for Other People
+
+Even if you are not building software, I think the underlying idea travels well.
+
+Many people want help from AI, but they do not want chaos. They want something between two bad extremes:
+
+- doing everything manually
+- handing everything over blindly
+
+That middle ground is where I think the most practical value lives.
+
+Break work into clear approved steps.  
+Do one thing at a time.  
+Check before trusting.  
+Use multiple eyes when needed.  
+Pause when a human decision is required.
+
+That is not just a software lesson. It is a general lesson about how to use powerful tools responsibly.
+
+-----
+
+## What Comes Next
+
+I shared Plan Orchestrator on GitHub and Hacker News because I think this problem is only going to become more important.
+
+I am actively using it on that private project right now, and I plan to keep improving it as I battle-test it across more projects.
+
+That is the path I trust most:
+
+build something because you need it,  
+use it in real conditions,  
+watch where it breaks,  
+improve it,  
+repeat.
+
+That is how this project started.
+
+And that is how it will continue to evolve.
+
+---
+
+*If you want to explore the project itself, here are the links: [GitHub](https://github.com/AysajanE/plan-orchestrator) and the [Hacker News post](https://news.ycombinator.com/item?id=47541465).*
