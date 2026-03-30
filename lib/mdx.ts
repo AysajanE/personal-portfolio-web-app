@@ -19,6 +19,11 @@ export interface Post {
   content: string
 }
 
+export function parseDate(dateString: string): Date {
+  const [year, month, day] = dateString.split('-').map(Number)
+  return new Date(Date.UTC(year, month - 1, day))
+}
+
 export function getAllPosts(): Post[] {
   const postsDir = path.join(process.cwd(), 'content', 'posts')
   
@@ -45,7 +50,7 @@ export function getAllPosts(): Post[] {
 
   return posts
     .filter(post => post.metadata.published !== false)
-    .sort((a, b) => new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime())
+    .sort((a, b) => parseDate(b.metadata.date).getTime() - parseDate(a.metadata.date).getTime())
 }
 
 export function getPostBySlug(slug: string): Post | null {
@@ -67,12 +72,20 @@ export function getPostBySlug(slug: string): Post | null {
 }
 
 export function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
+  return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  })
+    timeZone: 'UTC',
+  }).format(parseDate(dateString))
+}
+
+export function formatRssDate(dateString: string): string {
+  return parseDate(dateString).toUTCString()
+}
+
+export function formatSitemapDate(dateString: string): string {
+  return parseDate(dateString).toISOString()
 }
 
 export function getAllTags(): Record<string, number> {

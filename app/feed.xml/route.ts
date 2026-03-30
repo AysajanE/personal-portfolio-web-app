@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/lib/mdx'
+import { formatRssDate, getAllPosts } from '@/lib/mdx'
 
 export const runtime = 'nodejs'
 
@@ -24,7 +24,7 @@ export function GET(): Response {
       <description><![CDATA[${post.metadata.excerpt || post.metadata.title}]]></description>
       <link>${baseUrl}/blog/${post.slug}</link>
       <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
-      <pubDate>${new Date(post.metadata.date).toUTCString()}</pubDate>
+      <pubDate>${formatRssDate(post.metadata.date)}</pubDate>
       <author>contact@aysajaneziz.com (${post.metadata.author || 'Aysajan Eziz'})</author>
     </item>`).join('')}
   </channel>

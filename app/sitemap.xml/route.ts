@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/lib/mdx'
+import { formatSitemapDate, getAllPosts } from '@/lib/mdx'
 
 export const runtime = 'nodejs'
 
@@ -20,7 +20,7 @@ export function GET(): Response {
   ${posts.map(post => `
   <url>
     <loc>${baseUrl}/blog/${post.slug}</loc>
-    <lastmod>${new Date(post.metadata.date).toISOString()}</lastmod>
+    <lastmod>${formatSitemapDate(post.metadata.date)}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`).join('')}

@@ -1,11 +1,12 @@
 import Link from 'next/link'
-import { getAllTags } from '@/lib/mdx'
+import { getAllPosts, getAllTags } from '@/lib/mdx'
 
 export const metadata = { title: 'Tags' }
 
 export default function TagsPage() {
-  const tags = Object.entries(getAllTags()).sort((a,b) => b[1]-a[1])
-  const totalPosts = Object.values(getAllTags()).reduce((sum, count) => sum + count, 0)
+  const allTags = getAllTags()
+  const tags = Object.entries(allTags).sort((a,b) => b[1]-a[1])
+  const totalPosts = getAllPosts().length
 
   return (
     <div className="container py-16">

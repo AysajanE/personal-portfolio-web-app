@@ -27,6 +27,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const isAnalyticsEnabled = process.env.VERCEL === '1'
+
   return (
     <html lang="en">
       <body className="font-mono antialiased bg-white text-gray-900 leading-relaxed">
@@ -45,7 +47,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
-        <Analytics />
+        {isAnalyticsEnabled ? <Analytics /> : null}
       </body>
     </html>
   )

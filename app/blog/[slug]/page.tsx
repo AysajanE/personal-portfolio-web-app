@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getPostBySlug, getAllPosts, formatDate } from '@/lib/mdx'
+import { getMDXComponents } from '@/components/MDXComponents'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import rehypeHighlight from 'rehype-highlight'
@@ -60,44 +61,6 @@ export default async function BlogPost({ params }: Props) {
   const prev = i < all.length - 1 ? all[i + 1] : null // older
   const next = i > 0 ? all[i - 1] : null             // newer
 
-  // Simple inline MDX components for server-side rendering
-  const components = {
-    a: ({ href, children, ...props }: any) => {
-      if (href?.startsWith('http')) {
-        return (
-          <a 
-            href={href} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="underline hover:no-underline"
-            {...props}
-          >
-            {children}
-          </a>
-        )
-      }
-      return (
-        <Link 
-          href={href || ''} 
-          className="underline hover:no-underline"
-          {...props}
-        >
-          {children}
-        </Link>
-      )
-    },
-    img: ({ src, alt, ...props }: any) => (
-      <img
-        src={src}
-        alt={alt || ''}
-        loading="lazy"
-        decoding="async"
-        className="w-full h-auto rounded-md"
-        {...props}
-      />
-    ),
-  }
-
   return (
     <div className="container py-16">
       <Link href="/blog" className="underline hover:no-underline mb-8 inline-block">
@@ -131,7 +94,7 @@ export default async function BlogPost({ params }: Props) {
         <div className="prose prose-slate max-w-none">
           <MDXRemote
             source={post.content}
-            components={components}
+            components={getMDXComponents({})}
             options={{
               mdxOptions: {
                 remarkPlugins: [remarkMath, remarkGfm],
