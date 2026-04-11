@@ -1,0 +1,200 @@
+---
+title: "What I Learned Running a Swarm of AI Agents on a Real Research Project"
+date: "2026-04-11"
+excerpt: "Earlier this year I shared a system for coordinating multiple AI agents on research projects. Then I used it on a real one. Here is what changed, what broke, and what I learned when the hardest part turned out to be building a trustworthy dataset."
+author: "Aysajan Eziz"
+tags: ["project", "AI", "agentic-systems", "automation", "research"]
+category: "Project"
+published: true
+featured: false
+---
+
+# What I Learned Running a Swarm of AI Agents on a Real Research Project
+
+Earlier this year, I wrote about a system I built called the [Autonomous Agentic Research Swarm](/blog/autonomous-agentic-research-swarm). The core idea was simple: instead of having multiple AI agents talk to each other through complicated messaging systems, let them coordinate through shared files in a project folder. Like a shared whiteboard in an office, but for AI.
+
+That post described the blueprint. This post describes what happened when I actually put it under pressure.
+
+I used it on a real research project about money flows in one corner of the cryptocurrency world: estimating how much of the economic activity on Ethereum's rollup networks ends up being captured by Ethereum itself. The project involved pulling data from multiple sources, cleaning it, validating it, running calculations, generating charts, and writing up findings in a paper.
+
+This post is about the workflow more than the research findings themselves.
+
+Twenty-one tasks. Multiple AI agents working in parallel. And one task, `T035`, that consumed roughly 80 percent of the total effort during a concentrated week of real work.
+
+I still had to make human decisions when the research itself was ambiguous. The point was not to remove judgment. It was to remove coordination chaos.
+
+Here is what I learned.
+
+---
+
+## The Blueprint Was Not Enough
+
+When I wrote the original post, the system had three roles: a Planner that breaks work into tasks, a Worker that does the tasks, and a Judge that checks the quality.
+
+That sounded clean on paper. In practice, it left a gap.
+
+Who starts up the system? Who notices when something stalls? Who assembles all the pieces into a final deliverable? Who cleans up after a failed attempt?
+
+These are not planning tasks, not execution tasks, and not quality checks. They are operational tasks — the kind of behind-the-scenes work that keeps any team running smoothly.
+
+So I added a fourth role: the **Operator**.
+
+Think of it like a construction project. The Planner is the architect. The Workers are the builders. The Judge is the inspector. But you also need a site manager — someone who makes sure tools are ready, coordinates deliveries, handles surprises, and keeps the project moving day to day.
+
+That is what the Operator does. It manages the environment, supervises the running system, handles repairs when things break, and assembles the final output. Crucially, the Operator cannot change the scientific definitions or approve the quality of research work. Those boundaries matter.
+
+---
+
+## Written Agreements Before Work Starts
+
+The original system had what I called "protocol locks" — files that defined important terms so that different AI agents would not drift apart in their understanding.
+
+Good idea. But not enough.
+
+When running the real project, I realized I needed a much more thorough set of agreements in place before any work began. Not just definitions, but rules about who can do what, what counts as finished, and what the final deliverable must include.
+
+So the system now has a proper contract layer. Think of it like the paperwork you sign before a renovation:
+
+**The project agreement** spells out the research question, the data sources, the expected outputs, and the order in which things must happen. It also includes specific rules for edge cases. In this project, some networks did not fit the normal pattern cleanly. Rather than leaving those cases ambiguous, the contract had to say explicitly how they should be handled.
+
+**The framework policy** defines the rules of the game itself — what roles exist, what states a task can be in, what information each task must include, and what counts as a proper review. Instead of these rules being buried in long instruction documents that agents might misread, they are structured so the system can enforce them automatically.
+
+**Interface contracts** define how different types of work connect to each other. If one agent produces data that another agent needs to analyze, the contract specifies exactly what that handoff looks like.
+
+The result is that agents cannot cut corners, skip steps, or make assumptions about ambiguous situations. If something is not covered by the contracts, the system stops and asks a human.
+
+---
+
+## A Chain of Custody for Every Piece of Data
+
+One of the biggest additions since the original post is what I call the provenance system — a chain of custody for data.
+
+Every time the system pulls data from an outside source, it creates a receipt. That receipt records what was pulled, when, from where, and produces a fingerprint of the data. Every time raw data gets cleaned or transformed into something useful, another receipt gets created.
+
+Why does this matter?
+
+Because when you are doing research, you need to be able to trace any number, any chart, any finding all the way back to its source. If someone asks "where did this figure come from?", you should be able to answer: "This figure was generated from this validated dataset, which was built from these raw data pulls on these dates, which came from these sources."
+
+Without this chain, you are trusting that nothing went wrong at any step. With it, you can verify.
+
+The system now enforces this automatically. A task cannot be marked as ready for review unless its data receipts exist. The final assembly step checks that the entire chain is unbroken from raw sources to published output.
+
+---
+
+## `T035` Was the Real Bottleneck
+
+The hardest part by far was `T035`. Its job, in plain English, was to build the one core dataset that everything else depended on.
+
+That meant collecting the underlying records, cleaning them into usable tables, writing the audit trail that explained where they came from, and creating small checkable examples so later stages could verify them. In practice, most of the real difficulty was here, not in writing the paper.
+
+At one point, the pipeline stopped on a very specific problem. There was activity for one network, Scroll, in an older period before a major Ethereum upgrade, but the evidence needed to assign those costs correctly was incomplete. The system did the right thing: it blocked the task instead of guessing. That forced a repair to both the registry and the data-building code before downstream work could continue.
+
+Once that was fixed, `T035` exposed a second class of problems. Reruns were too heavy. Some cached surfaces were inefficient. At one point the raw manifest for a successful run grew so large that it was not publishable. In other words, the bottleneck was not "can the agents write code?" It was "can this pipeline become coherent, auditable, and reproducible enough that later stages can trust it?"
+
+This is where the swarm workflow earned its keep. The Planner created repair tasks. Workers executed them in isolation. The Judge verified the repairs. I still had to step in when there was a real scientific ambiguity, but I did not have to throw away the workflow and improvise a whole new process.
+
+By the end, the task graph had expanded well beyond the original neat plan. `T035` alone consumed roughly 80 percent of the total time.
+
+That was frustrating, but also clarifying. Any system can execute a happy-path plan. The real test is whether it can absorb a messy bottleneck without collapsing into confusion. This one did.
+
+---
+
+## The Paper Is Not Optional
+
+One decision I am glad I made: the final research paper is a required part of the output, not a nice-to-have.
+
+It would have been easy to stop at "we generated the charts and tables." But charts without narrative are just pretty pictures. The research question does not get answered by a chart alone. It gets answered by a written argument that explains what the data shows and what it means.
+
+So the system now includes a writing stage and a paper-building stage as required steps. The paper is written in a format that can be rendered into both a web page and a PDF. The release assembly step — the final checkpoint — will not succeed unless the paper exists and renders correctly.
+
+This forced discipline is valuable. It means the AI agents cannot declare victory prematurely. The work is not done until the findings are written up, the charts are embedded, the references are in place, and the whole thing builds cleanly.
+
+At the same time, I do not want to overclaim. The analysis and paper assembly layers still need more work. This is not the finish line. What this workflow proved is narrower but still important: it can carry a real project through the full chain from raw data to validated outputs to a draft paper/release package.
+
+---
+
+## Ten Workstreams, Clear Boundaries
+
+The original post talked about "workstreams" as a way to prevent agents from stepping on each other's toes. The idea was that each area of work would own specific files, and agents could not edit outside their area.
+
+The real project refined this into ten distinct lanes of work: defining the rules, collecting outside data, collecting blockchain data, maintaining the registry, running calculations, validating results, generating charts, writing the paper, reserving space for future modeling, and handling operations.
+
+Each workstream has an explicit list of what folders and files it owns. Each has rules about whether it can access the internet (only the data-pulling workstreams can). And each has rules about what it can and cannot consume — for instance, the charts workstream cannot use data that has not been through the validation workstream first.
+
+This is not bureaucracy for its own sake. These boundaries are what make it possible to run multiple AI agents at the same time without them creating conflicts or using bad data.
+
+---
+
+## Automated Quality Checks
+
+The original system had "quality gates" — automated checks that run before work gets approved. The new system has significantly expanded these.
+
+There is now a full test suite that checks:
+
+- Whether the core calculations produce correct results on sample data
+- Whether the paper structure is intact and all pieces are in place
+- Whether the data receipts are valid and complete
+- Whether the project folder structure follows the rules
+- Whether tasks follow the correct lifecycle
+- Whether the release catalog is consistent
+
+These checks run automatically every time changes are proposed. They also run on GitHub before changes are merged into the main project.
+
+The goal is simple: catch problems early, catch them automatically, and never let a broken change slip through because someone (human or AI) forgot to check.
+
+---
+
+## What Actually Got Produced
+
+At the end of this run, the system produced:
+
+- An evidence-backed registry of the blockchain networks being studied
+- Raw data pulls with full provenance records
+- Cleaned and processed datasets with their own provenance records
+- Validation reports confirming data integrity
+- Research figures and tables
+- A complete research paper with embedded visualizations
+- A release catalog tying everything together
+- A release record documenting exactly what was produced and when
+
+All of this was generated by AI agents coordinating through files, with human oversight at the moments where the research itself was genuinely ambiguous.
+
+And, at least on the current validated dataset, the project did produce a substantive answer: Ethereum appears to capture a much smaller share of rollup fee revenue after a major upgrade called Dencun than it did before.
+
+---
+
+## What I Would Tell My Past Self
+
+If I could go back to January when I wrote the original post, here is what I would say:
+
+**Your three-role model needs a fourth.** Somebody has to run the show. Call it an Operator and give it clear boundaries.
+
+**Write more contracts upfront.** Every ambiguity you leave unresolved will come back as a bug or a stall. Be painfully explicit about definitions, edge cases, and handoff formats.
+
+**Track data provenance from day one.** You will thank yourself later when you need to trace a suspicious number back to its source.
+
+**Assume the core data-building task will dominate the schedule.** In my case, `T035` was the real bottleneck by a wide margin. If the canonical dataset is shaky, everything downstream becomes theater.
+
+**Plan for repairs.** Your neat task sequence will not survive contact with reality. Design the system so that repair tasks feel natural, not exceptional.
+
+**Make the paper mandatory.** If the final write-up is optional, it will be the first thing that gets skipped. Do not let it be optional, even if the writing layer still needs refinement.
+
+**Boundaries are not overhead — they are the product.** The workstream ownership rules, the file path restrictions, the state machine for tasks — these are not bureaucratic friction. They are the reason you can run multiple AI agents in parallel without everything falling apart.
+
+---
+
+## Where This Goes Next
+
+The system has proven something meaningful: this workflow can support a real research project end to end, not just a toy coding demo.
+
+That does not mean the system is finished. The analysis and paper assembly layers still need more work, and the modeling and hybrid modes — where you combine data analysis with quantitative models — are defined in the contracts but have not been tested yet.
+
+The template remains open source. If you are interested in coordinating multiple AI agents on serious research work, the [repository](https://github.com/AysajanE/autonomous-agentic-research-swarm) is the best place to start. The contracts, task templates, and automation scripts are all there.
+
+If people are interested, I can write more about why `T035` was the real bottleneck, what broke along the way, what the swarm handled well, and what still needs improvement before this becomes truly robust.
+
+The biggest lesson from this whole experience? AI agents are capable of impressive work. But capability without structure is chaos. The structure — the roles, the contracts, the boundaries, the provenance chain, the quality gates — is what turns a pile of fast outputs into a functioning research workflow.
+
+---
+
+*This is a follow-up to [Autonomous Agentic Research Swarm](/blog/autonomous-agentic-research-swarm), which describes the original architecture. The [GitHub repository](https://github.com/AysajanE/autonomous-agentic-research-swarm) contains the full implementation.*
