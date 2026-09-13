@@ -8,6 +8,9 @@ import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.aysajaneziz.com'),
+  verification: {
+    google: '67ptG04qsp7-r7qBKSreNtyojv_vPDIlWT1LAaiatdA',
+  },
   title: {
     default: 'Aysajan Eziz',
     template: '%s | Aysajan Eziz'

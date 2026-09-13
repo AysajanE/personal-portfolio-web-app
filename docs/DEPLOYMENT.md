@@ -112,9 +112,9 @@ NEXT_PUBLIC_HOTJAR_ID=XXXXXXX
 # Contact Form (Optional)
 CONTACT_EMAIL=contact@aysajaneziz.com
 
-# SEO
-NEXT_PUBLIC_SITE_VERIFICATION=google-verification-code
 ```
+
+Google Search Console uses the public verification token in `metadata.verification.google` in `app/layout.tsx`. Keep that token in place after verification; no environment variable is required.
 
 ### Production Environment
 
@@ -132,7 +132,7 @@ In your Vercel dashboard, add these environment variables:
 - [ ] Add favicon files (`/public/favicon.ico`, `/public/icon-192x192.png`, etc.)
 
 ### SEO Optimization
-- [ ] Update the Google verification code in `app/layout.tsx`
+- [ ] Preserve the existing Google verification token in `app/layout.tsx`
 - [ ] Replace placeholder email addresses with real ones
 - [ ] Verify all meta descriptions and titles are accurate
 - [ ] Test the RSS feed at `/feed.xml`
