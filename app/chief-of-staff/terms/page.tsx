@@ -18,10 +18,10 @@ export default function ChiefOfStaffTermsPage() {
         Chief of Staff is developed and operated by Aysajan Eziz for his own
         personal planning, research, and coordination. It is under development,
         has no public signup, and is not currently offered as a service to others.
-        Google connections and the features described as planned are not yet enabled.
+        Read-only Calendar and selected-file Drive connection tests are available to the owner after consent; other features described as planned are not yet enabled.
       </p>
 
-      <h2>Planned use</h2>
+      <h2>Use and responsibilities</h2>
       <p>
         The owner is responsible for choosing which accounts, calendars,
         documents, and tasks the assistant may access, and must have permission
@@ -29,7 +29,7 @@ export default function ChiefOfStaffTermsPage() {
         own terms and the permissions actually granted.
       </p>
       <p>
-        Generated research, summaries, and proposed actions require review for
+        When the planned assistant features become available, generated research, summaries, and proposed actions will require review for
         accuracy and suitability. Planned Calendar actions require explicit
         approval before execution. The project makes no guarantee of uninterrupted
         availability or error-free outputs.
@@ -38,8 +38,7 @@ export default function ChiefOfStaffTermsPage() {
       <h2>Privacy and Google data</h2>
       <p>
         The <Link href="/chief-of-staff/privacy">privacy policy</Link> explains
-        current website data practices and the conditions that must be met before
-        Google access is enabled. Chief of Staff commits to following the Google
+        current website data practices and the private Google connection tools. Chief of Staff commits to following the Google
         API Services User Data Policy and its Limited Use requirements for all
         use and transfer of Google API data. Publishing these pages does not grant
         access to a Google account.
