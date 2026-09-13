@@ -6,8 +6,14 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-200 mt-16" role="contentinfo">
       <div className="container py-8">
-        <div className="flex justify-between items-center text-sm">
+        <div className="flex flex-wrap justify-between items-center gap-4 text-sm">
           <p>© {currentYear} Aysajan Eziz</p>
+          <Link
+            href="/chief-of-staff"
+            className="underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 rounded px-1 py-1"
+          >
+            Chief of Staff
+          </Link>
           <Link 
             href="/feed.xml" 
             className="underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 rounded px-1 py-1"

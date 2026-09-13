@@ -5,7 +5,7 @@ export const runtime = 'nodejs'
 export function GET(): Response {
   const baseUrl = 'https://www.aysajaneziz.com'
   
-  const staticPages = ['', '/blog', '/colophon']
+  const staticPages = ['', '/blog', '/colophon', '/chief-of-staff', '/chief-of-staff/privacy', '/chief-of-staff/terms']
   const posts = getAllPosts()
   
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
